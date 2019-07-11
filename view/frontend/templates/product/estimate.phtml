@@ -1,0 +1,28 @@
+<?php $_product = $this->getProductInfo() ?>
+<h3><?= __('Estimate shipping') ?></h3>
+<div class="fieldset">
+    <div class="field postcode">
+        <label class="label" for="fineweb.postcode"><span><?= __('Postcode') ?></span></label>
+        <div class="control">
+            <input type="text" minlength="8" maxlength="8" oninput="this.value=this.value.replace(/[^0-9]/g,'');" name="fineweb-postcode" id="fineweb-postcode" maxlength="9" title="<?= __('Postcode') ?>" class="input-text fineweb-postcode mask-cep" placeholder="<?= __('Type your Postcode (just numbers)') ?>" >
+        </div>
+    </div>
+    <div class="postcode-action">
+        <button name="btn-estimate-shipping" id="btn-estimate-shipping" type="button" title="<?= __('Estimate shipping') ?>" class="action primary tocart"><?= __('Estimate shipping') ?></button>
+        <a href="http://www.buscacep.correios.com.br/sistemas/buscacep/BuscaCepEndereco.cfm" target="_blank" title="<?= __('I do not know the postcode') ?>"><?= __('I do not know the postcode') ?></a>
+    </div>
+    <input type="hidden" name="fineweb_product_id" id="fineweb_product_id" value="<?= $_product->getId() ?>">
+</div>
+<ul id="shipping-estimate-results"></ul>
+<script>
+    require ([
+            'jquery'
+        ],
+        function ($) {
+            $(window).on("load", function () {
+                require([
+                    'finewebShipping'
+                ]);
+            });
+        });
+</script>
